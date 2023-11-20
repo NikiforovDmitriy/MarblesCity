@@ -1,0 +1,36 @@
+{
+    "type": "commonjs",
+    "name": "marblescity",
+    "version": "1.0.0",
+    "description": "",
+    "scripts": {
+        "dev": "npm-run-all --parallel dev:*",
+        "dev:webpack-client": "webpack-dev-server --config webpack.client.cjs",
+        "dev:webpack-server": "webpack --config webpack.server.cjs --watch",
+        "dev:nodemon": "nodemon ./src/server/server.js",
+        "build": "webpack --config webpack.client.cjs && webpack --config webpack.server.cjs",
+        "start": "NODE_ENV=production node src/server/server.js",
+        "postinstall": "npm run build"
+    },
+    "main": "src/server/server.js",
+    "keywords": [],
+    "author": "Nikiforov Dmitriy",
+    "license": "ISC",
+    "dependencies": {
+        "@enable3d/ammo-on-nodejs": "^0.25.4",
+        "@enable3d/ammo-physics": "^0.25.4",
+        "@geckos.io/client": "^2.3.2",
+        "@geckos.io/server": "^2.3.2",
+        "enable3d": "^0.25.4",
+        "express": "^4.18.2"
+    },
+    "devDependencies": {
+        "html-webpack-plugin": "^5.5.3",
+        "nodemon": "^3.0.1",
+        "npm-run-all": "^4.1.5",
+        "webpack": "^5.89.0",
+        "webpack-cli": "^5.1.4",
+        "webpack-dev-server": "^4.15.1",
+        "webpack-node-externals": "^3.0.0"
+    }
+}
