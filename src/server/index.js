@@ -5,7 +5,7 @@ const express = require('express')
 const http = require('http')
 const app = express()
 const server = http.createServer(app)
-const port = 8080
+const port = 3000
 const geckos = require('@geckos.io/server/cjs/index').default
 const io = geckos()
 
