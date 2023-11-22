@@ -7,8 +7,8 @@ const cors = require('cors')
 const app = express()
 // HTTPS SERVER
 const fs = require('fs')
-const privateKey = fs.readFileSync(path.join(__dirname, 'ssl', 'key.pem'))
-const certificate = fs.readFileSync(path.join(__dirname, 'ssl', 'cert.pem'))
+const privateKey = fs.readFileSync('./ssl/key.pem')
+const certificate = fs.readFileSync('./ssl/cert.pem')
 const credentials = { key: privateKey, cert: certificate }
 const server = https.createServer(credentials, app)
 
