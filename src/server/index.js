@@ -3,13 +3,16 @@ const { Physics, Loaders, ServerClock, ExtendedObject3D } = require('@enable3d/a
 const path = require('path')
 const express = require('express')
 const http = require('http')
+const cors = require('cors')
 const app = express()
 const server = http.createServer(app)
-const port = 9208
+const port = 3000
 const geckos = require('@geckos.io/server/cjs/index').default
 const io = geckos()
 
 io.addServer(server)
+
+app.use(cors())
 
 app.use('/', express.static('public'))
 

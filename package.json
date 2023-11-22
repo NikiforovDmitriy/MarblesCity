@@ -21,6 +21,7 @@
         "@enable3d/ammo-physics": "^0.25.4",
         "@geckos.io/client": "^2.3.2",
         "@geckos.io/server": "^2.3.2",
+        "cors": "^2.8.5",
         "enable3d": "^0.25.4",
         "express": "^4.18.2"
     },
