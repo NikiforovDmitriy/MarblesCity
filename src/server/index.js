@@ -2,10 +2,16 @@ var _ammo = require('@enable3d/ammo-on-nodejs/ammo/ammo.js')
 const { Physics, Loaders, ServerClock, ExtendedObject3D } = require('@enable3d/ammo-on-nodejs')
 const path = require('path')
 const express = require('express')
-const http = require('http')
+const https = require('https')
 const cors = require('cors')
 const app = express()
-const server = http.createServer(app)
+// HTTPS SERVER
+const fs = require('fs')
+const privateKey = fs.readFileSync('../../ssl/key.pem')
+const certificate = fs.readFileSync('../../ssl/cert.pem')
+const credentials = { key: privateKey, cert: certificate }
+const server = https.createServer(credentials, app)
+
 const port = 1444
 const geckos = require('@geckos.io/server/cjs/index').default
 const io = geckos({ cors: { allowAuthorization: true } })
