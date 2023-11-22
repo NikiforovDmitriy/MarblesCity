@@ -13,17 +13,6 @@ io.addServer(server)
 
 app.use('/', express.static('public'))
 
-const teleport = (box) => {
-    box.body.setCollisionFlags(2)
-    box.position.set(0, 2, 0)
-    box.body.needUpdate = true
-    box.body.once.update(() => {
-        box.body.setCollisionFlags(0)
-        box.body.setVelocity(0, 0, 0)
-        box.body.setAngularVelocity(0, 0, 0)
-    })
-}
-
 class ServerScene {
     constructor() {
         this.init()
@@ -36,11 +25,25 @@ class ServerScene {
 
     init() {
         // test if we have access to Ammo
-        console.log('Ammo', new Ammo.btVector3(1, 2, 3).y() === 2)
+        console.log('Ammo loaded : ', new Ammo.btVector3(1, 2, 3).y() === 2)
 
         // init the Physics
         this.physics = new Physics()
         this.factory = this.physics.factory
+
+        io.onConnection((channel) => {
+            channel.on('moving', (moving) => {
+                this.moveX = moving.moveX
+                this.moveZ = moving.moveZ
+            })
+            channel.on('operation', (data) => {
+                this.updatePhysics = data.updatePhysics
+            })
+        })
+
+        server.listen(port, () => {
+            console.log(`Listen port :${port}`)
+        })
     }
 
     create() {
@@ -76,20 +79,6 @@ class ServerScene {
                 ball.body.setBounciness(0.4)
 
                 this.objects.push(ball)
-
-                io.onConnection((channel) => {
-                    channel.on('moving', (moving) => {
-                        this.moveX = moving.moveX
-                        this.moveZ = moving.moveZ
-                        //console.log(this.moveX + ' - ' + this.moveZ)
-                    })
-                    channel.on('operation', (data) => {
-                        this.updatePhysics = data.updatePhysics
-                        //console.log('physics: ' + this.updatePhysics)
-                    })
-                })
-
-                server.listen(port)
             }
         )
 
