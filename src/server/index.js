@@ -8,11 +8,15 @@ const app = express()
 const server = http.createServer(app)
 const port = 3000
 const geckos = require('@geckos.io/server/cjs/index').default
-const io = geckos()
+const io = geckos({ cors: { allowAuthorization: true } })
 
 io.addServer(server)
 
-app.use(cors())
+app.use(
+    cors({
+        origin: ['https://marbles.city:3000'],
+    })
+)
 
 app.use('/', express.static('public'))
 
