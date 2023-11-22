@@ -5,17 +5,13 @@ const express = require('express')
 const http = require('http')
 const app = express()
 const server = http.createServer(app)
-const port = 3000
+const port = 9208
 const geckos = require('@geckos.io/server/cjs/index').default
 const io = geckos()
 
 io.addServer(server)
 
 app.use('/', express.static('public'))
-
-server.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
-})
 
 const teleport = (box) => {
     box.body.setCollisionFlags(2)
@@ -92,7 +88,8 @@ class ServerScene {
                         //console.log('physics: ' + this.updatePhysics)
                     })
                 })
-                io.listen()
+
+                server.listen(port)
             }
         )
 
