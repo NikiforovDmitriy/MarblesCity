@@ -4,7 +4,10 @@ const geckos = require('@geckos.io/server/cjs/index').default
 const { iceServers } = require('@geckos.io/server/cjs/index')
 const path = require('path')
 
-const io = geckos({ iceServers })
+const io = geckos({
+    iceServers: iceServers,
+    cors: { allowAuthorization: true },
+})
 
 class ServerScene {
     constructor() {

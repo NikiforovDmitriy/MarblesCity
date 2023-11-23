@@ -1,6 +1,5 @@
 const { Project, Scene3D, ExtendedObject3D, THREE } = require('enable3d')
 const geckos = require('@geckos.io/client').default
-
 const moveDirection = { left: 0, right: 0, forward: 0, back: 0 }
 let updatePhysics = false
 let needSendOperation = false
@@ -72,12 +71,14 @@ class Geckos extends Scene3D {
                         this.box.quaternion.set(u.quat.x, u.quat.y, u.quat.z, u.quat.w)
                     } else {
                         //this.box = this.add.box({}, { phong: { color: 'blue' } })
-                        this.load.gltf('../assets/glb/ground.glb').then((gltf) => {
-                            const child = gltf.scene.children[0]
-                            this.box.add(child)
-                            this.scene.add(this.box)
-                            this.groundLoaded = true
-                        })
+                        this.load
+                            .gltf(path.resolve('../../public/assets/glb/ground.glb'))
+                            .then((gltf) => {
+                                const child = gltf.scene.children[0]
+                                this.box.add(child)
+                                this.scene.add(this.box)
+                                this.groundLoaded = true
+                            })
                     }
                 } else if (u.name === 'ball') {
                     if (this.ball) {
