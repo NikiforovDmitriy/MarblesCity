@@ -55,7 +55,6 @@ class Geckos extends Scene3D {
 
     geckos() {
         const channel = geckos({
-            url: 'https://marbles.city',
             port: 1444,
         })
         this.mychannel = channel

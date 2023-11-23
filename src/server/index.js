@@ -10,10 +10,7 @@ const server = http.createServer(app)
 
 const port = 1444
 const geckos = require('@geckos.io/server/cjs/index').default
-const io = geckos({
-    origin: 'https://marbles.city',
-    cors: { allowAuthorization: true },
-})
+const io = geckos()
 
 io.addServer(server)
 
