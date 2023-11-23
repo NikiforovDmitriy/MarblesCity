@@ -71,14 +71,12 @@ class Geckos extends Scene3D {
                         this.box.quaternion.set(u.quat.x, u.quat.y, u.quat.z, u.quat.w)
                     } else {
                         //this.box = this.add.box({}, { phong: { color: 'blue' } })
-                        this.load
-                            .gltf(path.resolve('../../public/assets/glb/ground.glb'))
-                            .then((gltf) => {
-                                const child = gltf.scene.children[0]
-                                this.box.add(child)
-                                this.scene.add(this.box)
-                                this.groundLoaded = true
-                            })
+                        this.load.gltf('../../public/assets/glb/ground.glb').then((gltf) => {
+                            const child = gltf.scene.children[0]
+                            this.box.add(child)
+                            this.scene.add(this.box)
+                            this.groundLoaded = true
+                        })
                     }
                 } else if (u.name === 'ball') {
                     if (this.ball) {
