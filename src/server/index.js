@@ -1,32 +1,10 @@
 var _ammo = require('@enable3d/ammo-on-nodejs/ammo/ammo.js')
 const { Physics, Loaders, ServerClock, ExtendedObject3D } = require('@enable3d/ammo-on-nodejs')
-const path = require('path')
-const express = require('express')
-const http = require('http')
-const cors = require('cors')
-const app = express()
-
-const server = http.createServer(app)
-
-const port = 1444
 const geckos = require('@geckos.io/server/cjs/index').default
 const { iceServers } = require('@geckos.io/server/cjs/index')
-const io = geckos({
-    iceServers: process.env.NODE_ENV === 'production' ? iceServers : [],
-    cors: { allowAuthorization: true },
-})
+const path = require('path')
 
-io.addServer(server)
-
-app.use(cors())
-
-app.use('/', express.static('public'))
-
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../../public/index.html'))
-})
-
-//
+const io = geckos({ iceServers })
 
 class ServerScene {
     constructor() {
@@ -56,9 +34,7 @@ class ServerScene {
             })
         })
 
-        server.listen(port, () => {
-            console.log(`Listen port :${port}`)
-        })
+        io.listen()
     }
 
     create() {

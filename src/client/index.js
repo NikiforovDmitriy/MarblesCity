@@ -54,9 +54,7 @@ class Geckos extends Scene3D {
     groundLoaded = false
 
     geckos() {
-        const channel = geckos({
-            port: 1444,
-        })
+        const channel = geckos()
         this.mychannel = channel
 
         channel.onConnect((error) => {

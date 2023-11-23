@@ -6,8 +6,8 @@ module.exports = {
     target: 'node',
     entry: './src/server/index.js',
     output: {
-        path: path.resolve(__dirname, './src/server'),
-        filename: 'server.js',
+        path: path.resolve(__dirname, './dist/server'),
+        filename: 'bundle.js',
     },
     resolve: {
         extensions: ['.ts', '.tsx', '.js'],
