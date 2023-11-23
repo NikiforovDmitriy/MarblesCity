@@ -10,13 +10,23 @@ const server = http.createServer(app)
 
 const port = 1444
 const geckos = require('@geckos.io/server/cjs/index').default
-const io = geckos()
+const { iceServers } = require('@geckos.io/server/cjs/index')
+const io = geckos({
+    iceServers: process.env.NODE_ENV === 'production' ? iceServers : [],
+    cors: { allowAuthorization: true },
+})
 
 io.addServer(server)
 
 app.use(cors())
 
 app.use('/', express.static('public'))
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '../../public/index.html'))
+})
+
+//
 
 class ServerScene {
     constructor() {
