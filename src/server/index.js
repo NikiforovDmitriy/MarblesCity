@@ -45,36 +45,34 @@ class ServerScene {
         this.physics.setGravity(0, -9.81 * 2, 0)
 
         const GLTFLoader = new Loaders.GLTFLoader()
-        GLTFLoader.load(path.resolve(__dirname, '../../public/assets/glb/ground.glb')).then(
-            (gltf) => {
-                const child = gltf.scene.children[0]
-                const myground = new ExtendedObject3D()
+        GLTFLoader.load(path.resolve(__dirname, 'ground.glb')).then((gltf) => {
+            const child = gltf.scene.children[0]
+            const myground = new ExtendedObject3D()
 
-                myground.add(child)
-                myground.position.set(0, 0, 0)
-                myground.name = 'ground'
+            myground.add(child)
+            myground.position.set(0, 0, 0)
+            myground.name = 'ground'
 
-                const physicsOptions = {
-                    addChildren: false,
-                    shape: 'hacd',
-                }
-
-                this.factory.add.existing(myground)
-                this.physics.add.existing(myground, physicsOptions)
-
-                //myground.body.setFriction(1)
-                myground.body.setCollisionFlags(2)
-                myground.body.setFriction(0.5)
-
-                this.objects.push(myground)
-
-                const ball = this.physics.add.sphere({ name: 'ball', y: 25, radius: 1 })
-                ball.body.setFriction(0.7)
-                ball.body.setBounciness(0.4)
-
-                this.objects.push(ball)
+            const physicsOptions = {
+                addChildren: false,
+                shape: 'hacd',
             }
-        )
+
+            this.factory.add.existing(myground)
+            this.physics.add.existing(myground, physicsOptions)
+
+            //myground.body.setFriction(1)
+            myground.body.setCollisionFlags(2)
+            myground.body.setFriction(0.5)
+
+            this.objects.push(myground)
+
+            const ball = this.physics.add.sphere({ name: 'ball', y: 25, radius: 1 })
+            ball.body.setFriction(0.7)
+            ball.body.setBounciness(0.4)
+
+            this.objects.push(ball)
+        })
 
         const clock = new ServerClock()
 
