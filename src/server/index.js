@@ -92,6 +92,8 @@ class ServerScene {
     }
 
     send(obj) {
+        if (obj == null) return
+
         const qx = this.t(obj.quaternion.x, 3)
         const qy = this.t(obj.quaternion.y, 3)
         const qz = this.t(obj.quaternion.z, 3)
