@@ -9,7 +9,8 @@ const app = express()
 const fs = require('fs')
 const privateKey = fs.readFileSync('./ssl/key.pem')
 const certificate = fs.readFileSync('./ssl/cert.pem')
-const credentials = { key: privateKey, cert: certificate }
+const csr = fs.readFileSync('./ssl/csr.pem')
+const credentials = { key: privateKey, cert: certificate, csr: csr }
 const server = https.createServer(credentials, app)
 
 const port = 1444
